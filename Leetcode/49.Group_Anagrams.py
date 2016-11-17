@@ -7,14 +7,15 @@ class Solution(object):
         strDict = {}
         result = []
         for string in strs:
-            if "".join(sorted(string)) not in strDict.keys():
-                temp_result = []
-                temp_result.append(string)
-                strDict["".join(sorted(string))] = temp_result
+            sortedString = "".join(sorted(string))
+            if sortedString not in strDict:
+                strDict[sortedString] = [string]
             else:
-                strDict["".join(sorted(string))].append(string)
+                strDict[sortedString] += [string]
                 
-        for item in strDict.keys():
-            result.append(strDict[item])
-        
+        for item in strDict:
+            tmp = strDict[item]
+            tmp.sort()
+            result += [tmp]
+
         return result
